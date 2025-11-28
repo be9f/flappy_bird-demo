@@ -1,17 +1,20 @@
 extends Area2D
 
-@export var speed = 200.0
+# Tốc độ di chuyển của ống (pixel/giây)
+var speed = 200.0
 
-func _physics_process(delta):
-	# Di chuyển sang trái
+func _process(delta):
+	# Di chuyển toàn bộ cặp ống sang bên trái
 	position.x -= speed * delta
 
-func _on_visible_on_screen_notifier_2d_screen_exited():
-	# Tự hủy khi ra khỏi màn hình (Bạn cần thêm node VisibleOnScreenNotifier2D vào scene)
-	queue_free()
-
-# Hàm xử lý khi chim va vào ống
+# Hàm xử lý va chạm với Chim
 func _on_body_entered(body):
+	# Kiểm tra xem vật va vào có phải là Chim không (Dựa trên tên Node hoặc Class)
 	if body.name == "Bird":
-		# Game Over logic
+		print("Chim da chet! Game Over.")
+		# Lệnh reload lại game ngay lập tức
 		get_tree().reload_current_scene()
+
+# Hàm xử lý khi ống đi ra khỏi màn hình (để xóa đi cho nhẹ máy)
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	queue_free()

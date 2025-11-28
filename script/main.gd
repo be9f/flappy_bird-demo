@@ -1,7 +1,7 @@
 extends Node2D
 
 # Preload scene ống để sinh ra
-var pipe_scene = preload("res://Scene/pipe.tscn") 
+var pipe_scene = preload("res://script/PipePair.gd") 
 
 func _ready():
 	# Kết nối tín hiệu timeout của Timer

@@ -10,7 +10,7 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 
 	# 2. Xử lý nhảy
-	if Input.is_action_just_pressed("jump"):  
+	if Input.is_action_just_pressed("jump"):
 		velocity.y = JUMP_VELOCITY
 		rotation_degrees = -max_rotation_degrees # Ngước đầu lên khi nhảy
 

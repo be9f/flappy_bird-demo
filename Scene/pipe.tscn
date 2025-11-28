@@ -1,42 +1,39 @@
-[gd_scene load_steps=6 format=3 uid="uid://csy8t5quolosw"]
+[gd_scene load_steps=6 format=3 uid="uid://bq8djogiefbah"]
 
 [ext_resource type="Script" uid="uid://b7g8gjokkyqjt" path="res://script/PipePair.gd" id="1_0v8x5"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_s7mr4"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ip2qr"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q44fn"]
-size = Vector2(215, 422)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s7mr4"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ssxuh"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0v8x5"]
-size = Vector2(24, 235)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s183f"]
 
 [node name="PipePair" type="Area2D"]
 script = ExtResource("1_0v8x5")
 
-[node name="Up" type="Sprite2D" parent="."]
-position = Vector2(0.999996, 1.00002)
-scale = Vector2(212, 422)
-texture = SubResource("PlaceholderTexture2D_s7mr4")
+[node name="TopSprite" type="Sprite2D" parent="."]
+scale = Vector2(8.4127, 19.92)
+texture = SubResource("PlaceholderTexture2D_ip2qr")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 1)
-shape = SubResource("RectangleShape2D_q44fn")
+[node name="TopCollision" type="CollisionShape2D" parent="."]
+scale = Vector2(0.420635, 1)
+shape = SubResource("RectangleShape2D_s7mr4")
 
-[node name="Down" type="Sprite2D" parent="."]
-position = Vector2(3.49999, 648)
-scale = Vector2(215, 422)
+[node name="BottomSprite" type="Sprite2D" parent="."]
+position = Vector2(0.0800009, 32.98)
+scale = Vector2(8.48, 19.96)
 texture = SubResource("PlaceholderTexture2D_ssxuh")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(3, 648)
-shape = SubResource("RectangleShape2D_q44fn")
+[node name="BottomCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0.0800009, 32.98)
+scale = Vector2(0.420635, 1)
+shape = SubResource("RectangleShape2D_s183f")
 
-[node name="ScoreArea" type="Area2D" parent="."]
-position = Vector2(0, 316)
-collision_layer = 2
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, 16.5)
+scale = Vector2(0.4, 0.65)
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="ScoreArea"]
-position = Vector2(-2, 1.5)
-shape = SubResource("RectangleShape2D_0v8x5")
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
