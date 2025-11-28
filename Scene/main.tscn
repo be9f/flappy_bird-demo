@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://c12btn5auc5yh"]
+
+[ext_resource type="Script" uid="uid://blmjxy4ra65s8" path="res://script/main.gd" id="1_sblpm"]
+[ext_resource type="PackedScene" uid="uid://wml6rdie5klh" path="res://Scene/bird.tscn" id="2_r34rm"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_sblpm")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(28.88, 16.24)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_r34rm")]
+position = Vector2(152, 320)
+
+[node name="PipeSpawner" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
