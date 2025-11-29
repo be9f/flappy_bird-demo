@@ -1,39 +1,38 @@
-[gd_scene load_steps=6 format=3 uid="uid://bq8djogiefbah"]
+[gd_scene load_steps=4 format=3 uid="uid://bq8djogiefbah"]
 
 [ext_resource type="Script" uid="uid://b7g8gjokkyqjt" path="res://script/PipePair.gd" id="1_w1d04"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ip2qr"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_w1d04"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s7mr4"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ssxuh"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s183f"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p3vfi"]
+size = Vector2(0.907789, 0.873)
 
 [node name="PipePair" type="Area2D"]
+position = Vector2(296, 315)
+scale = Vector2(111.7, 100)
 script = ExtResource("1_w1d04")
 
-[node name="TopSprite" type="Sprite2D" parent="."]
-scale = Vector2(8.4127, 19.92)
-texture = SubResource("PlaceholderTexture2D_ip2qr")
+[node name="TopPipeSprite" type="Sprite2D" parent="."]
+position = Vector2(-0.0102954, -3.23)
+scale = Vector2(1, 5)
+texture = SubResource("PlaceholderTexture2D_w1d04")
 
-[node name="TopCollision" type="CollisionShape2D" parent="."]
-scale = Vector2(0.420635, 1)
-shape = SubResource("RectangleShape2D_s7mr4")
-
-[node name="BottomSprite" type="Sprite2D" parent="."]
-position = Vector2(0.0800009, 32.98)
-scale = Vector2(8.48, 19.96)
-texture = SubResource("PlaceholderTexture2D_ssxuh")
-
-[node name="BottomCollision" type="CollisionShape2D" parent="."]
-position = Vector2(0.0800009, 32.98)
-scale = Vector2(0.420635, 1)
-shape = SubResource("RectangleShape2D_s183f")
+[node name="TopPipeCollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0.00268586, -3.2265)
+shape = SubResource("RectangleShape2D_p3vfi")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(0, 16.5)
-scale = Vector2(0.4, 0.65)
+scale = Vector2(0.0496866, 0.07)
+
+[node name="DownPipeSprite" type="Sprite2D" parent="."]
+position = Vector2(-0.0268577, 2.9)
+scale = Vector2(0.87735, 4.36)
+texture = SubResource("PlaceholderTexture2D_w1d04")
+
+[node name="DownPipeCollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(-0.0201431, 2.905)
+scale = Vector2(1, 5)
+shape = SubResource("RectangleShape2D_p3vfi")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
