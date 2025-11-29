@@ -10,10 +10,13 @@ func _process(delta):
 # Hàm xử lý va chạm với Chim
 func _on_body_entered(body):
 	# Kiểm tra xem vật va vào có phải là Chim không (Dựa trên tên Node hoặc Class)
+	print("Body entered: ", body.name) #Thêm print để debug
 	if body.name == "Bird":
-		print("Chim da chet! Game Over.")
+		print("Chim da chet! Game Over.") #Thêm print để debug
 		# Lệnh reload lại game ngay lập tức
 		get_tree().reload_current_scene()
+		# Đảm bảo rằng bạn không cần phải tiếp tục thực hiện các hành động khác sau khi reload scene.
+		queue_free()  # Xóa PipePair sau khi reload scene để tránh các lỗi tiềm ẩn
 
 # Hàm xử lý khi ống đi ra khỏi màn hình (để xóa đi cho nhẹ máy)
 func _on_visible_on_screen_notifier_2d_screen_exited():
