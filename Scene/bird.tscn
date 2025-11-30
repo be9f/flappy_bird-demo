@@ -1,18 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://wml6rdie5klh"]
 
 [ext_resource type="Script" uid="uid://bi2rfhbsmrijt" path="res://script/Bird.gd" id="1_easqi"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_easqi"]
+[ext_resource type="Texture2D" uid="uid://b86v7huxsocc4" path="res://sprites/bluebird-midflap.png" id="2_31e0k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_186t8"]
-radius = 33.0151
+radius = 18.1108
 
 [node name="Bird" type="CharacterBody2D"]
 script = ExtResource("1_easqi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(64, 66)
-texture = SubResource("PlaceholderTexture2D_easqi")
+texture = ExtResource("2_31e0k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_186t8")

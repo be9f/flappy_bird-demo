@@ -1,16 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://c12btn5auc5yh"]
+[gd_scene load_steps=5 format=3 uid="uid://c12btn5auc5yh"]
 
 [ext_resource type="Script" uid="uid://blmjxy4ra65s8" path="res://script/main.gd" id="1_sblpm"]
 [ext_resource type="PackedScene" uid="uid://wml6rdie5klh" path="res://Scene/Bird.tscn" id="2_r34rm"]
+[ext_resource type="Texture2D" uid="uid://kj3y27atmyc2" path="res://sprites/background-day.png" id="3_r34rm"]
+[ext_resource type="Texture2D" uid="uid://cpj3p3jyeqckw" path="res://sprites/base.png" id="4_2wwxx"]
 
 [node name="World" type="Node2D"]
+scale = Vector2(1.15024, 0.902909)
 script = ExtResource("1_sblpm")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_left = 2.0
-offset_right = 25.0
-offset_bottom = 40.0
-scale = Vector2(28.88, 16.24)
+offset_left = 0.869383
+offset_top = -22.1506
+offset_right = 288.869
+offset_bottom = 489.849
+scale = Vector2(1.2345, 1.53137)
+texture = ExtResource("3_r34rm")
 
 [node name="PipeSpawner" type="Timer" parent="."]
 wait_time = 1.5
@@ -18,3 +23,8 @@ autostart = true
 
 [node name="Bird" parent="." instance=ExtResource("2_r34rm")]
 position = Vector2(58, 304)
+
+[node name="Base" type="Sprite2D" parent="."]
+position = Vector2(167.791, 796.315)
+scale = Vector2(1.0563, 1)
+texture = ExtResource("4_2wwxx")
