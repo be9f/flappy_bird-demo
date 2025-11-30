@@ -25,6 +25,6 @@ autostart = true
 position = Vector2(58, 304)
 
 [node name="Base" type="Sprite2D" parent="."]
-position = Vector2(167.791, 796.315)
+position = Vector2(177.354, 796.315)
 scale = Vector2(1.0563, 1)
 texture = ExtResource("4_2wwxx")
