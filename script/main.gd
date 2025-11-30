@@ -24,4 +24,9 @@ func _on_pipe_spawner_timeout():
 
 func _on_pipe_hit(body):
 	if body.name == "Bird":  #Kiểm tra tên của đối tượng va chạm
-		get_tree().reload_current_scene()
+		print("Bird hit pipe!") # Add a print statement to confirm the code is reached.
+		print("get_tree() value:", get_tree()) # Debugging - check if get_tree() is null
+		if get_tree() != null:  # Check before calling reload_current_scene()
+			get_tree().reload_current_scene()
+		else:
+			print("Error: get_tree() is null. Cannot reload scene.") # Informative message

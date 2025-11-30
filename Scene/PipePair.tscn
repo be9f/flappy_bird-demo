@@ -1,14 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://bq8djogiefbah"]
+[gd_scene load_steps=5 format=3 uid="uid://bq8djogiefbah"]
 
 [ext_resource type="Script" uid="uid://b7g8gjokkyqjt" path="res://script/PipePair.gd" id="1_w1d04"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_w1d04"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p3vfi"]
-size = Vector2(0.907789, 0.873)
+size = Vector2(0.957924, 4.97)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w1d04"]
+size = Vector2(0.904207, 4.35)
 
 [node name="PipePair" type="Area2D"]
-position = Vector2(296, 315)
 scale = Vector2(111.7, 100)
 script = ExtResource("1_w1d04")
 
@@ -18,21 +20,21 @@ scale = Vector2(1, 5)
 texture = SubResource("PlaceholderTexture2D_w1d04")
 
 [node name="TopPipeCollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2(0.00268586, -3.2265)
+position = Vector2(-0.0223813, -3.235)
 shape = SubResource("RectangleShape2D_p3vfi")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-scale = Vector2(0.0496866, 0.07)
-
 [node name="DownPipeSprite" type="Sprite2D" parent="."]
-position = Vector2(-0.0268577, 2.9)
+position = Vector2(-0.0268577, 3.25)
 scale = Vector2(0.87735, 4.36)
 texture = SubResource("PlaceholderTexture2D_w1d04")
 
 [node name="DownPipeCollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2(-0.0201431, 2.905)
-scale = Vector2(1, 5)
-shape = SubResource("RectangleShape2D_p3vfi")
+position = Vector2(-0.0223818, 3.245)
+shape = SubResource("RectangleShape2D_w1d04")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, 0.195)
+scale = Vector2(0.0496866, 0.0895)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
