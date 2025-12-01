@@ -1,5 +1,5 @@
 extends Area2D
-
+signal scored
 # Tốc độ di chuyển của ống (pixel/giây)
 var speed = 200.0
 
@@ -9,15 +9,20 @@ func _process(delta):
 
 # Hàm xử lý va chạm với Chim
 func _on_body_entered(body):
-	# Kiểm tra xem vật va vào có phải là Chim không (Dựa trên tên Node hoặc Class)
-	print("Body entered: ", body.name) #Thêm print để debug
 	if body.name == "Bird":
-		print("Chim da chet! Game Over.") #Thêm print để debug
-		# Lệnh reload lại game ngay lập tức
-		get_tree().reload_current_scene()
-		# Đảm bảo rằng bạn không cần phải tiếp tục thực hiện các hành động khác sau khi reload scene.
-		queue_free()  # Xóa PipePair sau khi reload scene để tránh các lỗi tiềm ẩn
+		# Gọi hàm die() bên script con chim
+		if body.has_method("die"):
+			body.die()
 
 # Hàm xử lý khi ống đi ra khỏi màn hình (để xóa đi cho nhẹ máy)
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
+
+
+func _on_score_area_body_entered(body: Node2D) -> void:
+	if body.name == "Bird":
+		# QUAN TRỌNG: Kiểm tra xem chim còn sống không?
+		# Nếu chim còn sống (is_alive == true) thì mới tính điểm
+		if body.get("is_alive") == true:
+			scored.emit()
+			$ScoreArea.queue_free() # Xóa vùng điểm để không tính 2 lần

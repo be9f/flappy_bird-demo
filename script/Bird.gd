@@ -3,8 +3,12 @@ extends CharacterBody2D
 const JUMP_VELOCITY = -400.0 # Lực nhảy
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") # Lấy trọng lực mặc định
 var max_rotation_degrees = 25.0
+var is_alive = true
 
 func _physics_process(delta):
+	# Nếu chết rồi thì không cho bay nữa
+	if is_alive == false:
+		return
 	# 1. Áp dụng trọng lực
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -26,3 +30,10 @@ func _physics_process(delta):
 	# Nếu chim rơi quá thấp hoặc bay quá cao -> chết
 	if global_position.y > 854 or global_position.y < -50:
 		get_tree().reload_current_scene() # Reset game
+		
+# Tạo hàm xử lý cái chết riêng
+func die():
+	if is_alive == true:
+		is_alive = false
+		# Có thể thêm hiệu ứng ngã xuống đất rồi mới reload
+		get_tree().reload_current_scene()

@@ -1,19 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://c12btn5auc5yh"]
+[gd_scene load_steps=6 format=3 uid="uid://c12btn5auc5yh"]
 
 [ext_resource type="Script" uid="uid://blmjxy4ra65s8" path="res://script/main.gd" id="1_sblpm"]
-[ext_resource type="PackedScene" uid="uid://wml6rdie5klh" path="res://Scene/Bird.tscn" id="2_r34rm"]
+[ext_resource type="PackedScene" uid="uid://wml6rdie5klh" path="res://Scene/bird.tscn" id="2_r34rm"]
 [ext_resource type="Texture2D" uid="uid://kj3y27atmyc2" path="res://sprites/background-day.png" id="3_r34rm"]
 [ext_resource type="Texture2D" uid="uid://cpj3p3jyeqckw" path="res://sprites/base.png" id="4_2wwxx"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2wwxx"]
+font_size = 40
 
 [node name="World" type="Node2D"]
 scale = Vector2(1.15024, 0.902909)
 script = ExtResource("1_sblpm")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_left = 0.869383
-offset_top = -22.1506
-offset_right = 288.869
-offset_bottom = 489.849
+offset_left = 1.0
+offset_top = -22.0
+offset_right = 289.0
+offset_bottom = 490.0
 scale = Vector2(1.2345, 1.53137)
 texture = ExtResource("3_r34rm")
 
@@ -28,3 +31,15 @@ position = Vector2(58, 304)
 position = Vector2(177.354, 796.315)
 scale = Vector2(1.0563, 1)
 texture = ExtResource("4_2wwxx")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_right = 40.0
+offset_bottom = 55.0
+grow_horizontal = 2
+text = "0"
+label_settings = SubResource("LabelSettings_2wwxx")
