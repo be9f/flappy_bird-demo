@@ -1,5 +1,6 @@
 extends Node2D
-
+# Khai báo biến để lấy node Menu (kéo thả hoặc gõ đúng đường dẫn)
+@onready var game_over_menu = $CanvasLayer/GameOverMenu
 # Preload scene ống để sinh ra
 var pipe_scene = preload("res://Scene/PipePair.tscn")
 var score = 0
@@ -23,18 +24,7 @@ func _on_pipe_spawner_timeout():
 	
 	add_child(pipe)
 
-	# 4. Thêm vào World
-	add_child(pipe)
 
-func _on_pipe_hit(body):
-	if body.name == "Bird":  #Kiểm tra tên của đối tượng va chạm
-		print("Bird hit pipe!") # Add a print statement to confirm the code is reached.
-		print("get_tree() value:", get_tree()) # Debugging - check if get_tree() is null
-		if get_tree() != null:  # Check before calling reload_current_scene()
-			get_tree().reload_current_scene()
-		else:
-			print("Error: get_tree() is null. Cannot reload scene.") # Informative message
-# Hàm này được gọi khi nhận tín hiệu từ ống
 func _on_point_scored():
 	score += 1
 	# Có thể thêm âm thanh "Ting" ở đây
@@ -42,3 +32,18 @@ func _on_point_scored():
 # Hàm cập nhật text lên màn hình
 func update_score_label():
 	$CanvasLayer/ScoreLabel.text = str(score)
+func _on_restart_button_pressed():
+	# Bỏ tạm dừng game (nếu bạn có dùng tính năng pause)
+	get_tree().paused = false
+	# Load lại màn chơi hiện tại
+	get_tree().reload_current_scene()
+func _game_over():
+	# 1. Dừng bộ đếm sinh ống
+	$PipeSpawner.stop()
+	
+	# 2. Hiện menu Game Over
+	game_over_menu.visible = true
+	
+	# 3. Dừng toàn bộ hoạt động của game (Chim đứng yên, ống dừng trôi)
+	# Lệnh này cực mạnh, nó đóng băng toàn bộ physics
+	get_tree().paused = true

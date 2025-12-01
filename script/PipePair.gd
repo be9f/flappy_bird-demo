@@ -10,10 +10,13 @@ func _process(delta):
 # Hàm xử lý va chạm với Chim
 func _on_body_entered(body):
 	if body.name == "Bird":
-		# Gọi hàm die() bên script con chim
-		if body.has_method("die"):
-			body.die()
-
+		# THAY ĐỔI Ở ĐÂY: Không gọi reload_current_scene() nữa
+		# Mà gọi hàm _game_over() ở bên World
+		
+		# Cách gọi hàm của node cha (World)
+		var world = get_tree().current_scene
+		if world.has_method("_game_over"):
+			world._game_over()
 # Hàm xử lý khi ống đi ra khỏi màn hình (để xóa đi cho nhẹ máy)
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
