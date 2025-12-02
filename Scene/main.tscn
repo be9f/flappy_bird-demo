@@ -15,9 +15,8 @@ script = ExtResource("1_sblpm")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_left = 1.0
-offset_top = -22.0
 offset_right = 289.0
-offset_bottom = 534.788
+offset_bottom = 542.4218
 scale = Vector2(1.2345, 1.53137)
 texture = ExtResource("3_r34rm")
 
@@ -26,7 +25,7 @@ wait_time = 1.5
 autostart = true
 
 [node name="Bird" parent="." instance=ExtResource("2_r34rm")]
-position = Vector2(162.57478, 454.08786)
+position = Vector2(180, 427)
 
 [node name="Base" type="Sprite2D" parent="."]
 position = Vector2(178.22366, 886.0251)
