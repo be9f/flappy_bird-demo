@@ -17,7 +17,7 @@ script = ExtResource("1_sblpm")
 offset_left = 1.0
 offset_top = -22.0
 offset_right = 289.0
-offset_bottom = 490.0
+offset_bottom = 534.788
 scale = Vector2(1.2345, 1.53137)
 texture = ExtResource("3_r34rm")
 
@@ -26,10 +26,10 @@ wait_time = 1.5
 autostart = true
 
 [node name="Bird" parent="." instance=ExtResource("2_r34rm")]
-position = Vector2(58, 304)
+position = Vector2(162.57478, 454.08786)
 
 [node name="Base" type="Sprite2D" parent="."]
-position = Vector2(177.354, 796.315)
+position = Vector2(178.22366, 886.0251)
 scale = Vector2(1.0563, 1)
 texture = ExtResource("4_2wwxx")
 
@@ -51,11 +51,14 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Gameover" type="Sprite2D" parent="CanvasLayer/GameOverMenu"]
-position = Vector2(207, 268)
+position = Vector2(180, 268)
+scale = Vector2(0.9973959, 1)
 texture = ExtResource("5_3amdw")
 
 [node name="RestartButton" type="Button" parent="CanvasLayer/GameOverMenu"]
@@ -63,7 +66,7 @@ process_mode = 3
 layout_mode = 0
 offset_left = 107.0
 offset_top = 438.0
-offset_right = 299.0
+offset_right = 276.0
 offset_bottom = 486.0
 text = "RESET"
 
