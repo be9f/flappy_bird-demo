@@ -1,58 +1,53 @@
 extends CharacterBody2D
 
-const JUMP_VELOCITY = -400.0 # Lực nhảy
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") # Lấy trọng lực mặc định
-var max_rotation_degrees = 25.0
+# --- Cấu hình ---
+const JUMP_VELOCITY = -450.0 # Tăng nhẹ lực nhảy để cảm giác tốt hơn
+const FALL_SPEED = 1000.0    # Tốc độ rơi tối đa
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_alive = true
 
+# --- Tín hiệu ---
+signal died # Gửi tin hiệu ra ngoài khi chim chết
+
+func _ready():
+	# Thêm chim vào nhóm 'player' để dễ nhận diện va chạm
+	add_to_group("player")
+
 func _physics_process(delta):
-	# Nếu chết rồi thì không cho bay nữa
-	if is_alive == false:
+	if not is_alive:
 		return
-	# 1. Áp dụng trọng lực
-	if not is_on_floor():
-		velocity.y += gravity * delta
-	
-	# === LOGIC MỚI: CHẠM SÀN GAME OVER ===
-	if is_on_floor():
-		die()
-		velocity.y = 0 # Đảm bảo chim không bị bật lên do is_on_floor()
-	# ======================================
-	
+
+	# 1. Xử lý trọng lực
+	# Áp dụng trọng lực và giới hạn tốc độ rơi
+	velocity.y += gravity * delta
+	if velocity.y > FALL_SPEED:
+		velocity.y = FALL_SPEED
+
 	# 2. Xử lý nhảy
 	if Input.is_action_just_pressed("jump"):
 		velocity.y = JUMP_VELOCITY
-		rotation_degrees = -max_rotation_degrees # Ngước đầu lên khi nhảy
 
-	# 3. Xoay đầu chim khi rơi
-	if velocity.y > 0:
-		# Lerp để xoay mượt mà xuống dưới (tối đa 90 độ)
-		rotation_degrees = lerp(rotation_degrees, 90.0, 5 * delta)
+	# 3. Xử lý xoay chim mượt mà (Rotation)
+	# Nếu bay lên: ngước đầu lên (-25 độ). Nếu rơi: cúi đầu xuống (tối đa 90 độ).
+	var target_rotation = 90.0
+	if velocity.y < 0:
+		target_rotation = -25.0
+	
+	# Lerp để xoay từ từ, nhân delta để độc lập với framerate
+	rotation_degrees = lerp(rotation_degrees, target_rotation, 10 * delta)
 
 	# 4. Di chuyển
 	move_and_slide()
 
-	# 5. Kiểm tra va chạm sàn/trần (đơn giản hóa)
-	# Nếu chim rơi quá thấp hoặc bay quá cao -> chết
-	if global_position.y > 854 or global_position.y < -45:
-		die() # Gọi hàm Game Over mới
+	# 5. Kiểm tra rơi xuống vực hoặc bay quá cao (Dùng Viewport thay vì số cứng)
+	var viewport_rect = get_viewport_rect()
+	var screen_bottom = viewport_rect.size.y
+	# Giả sử chạm đáy là chết
+	if global_position.y > screen_bottom or global_position.y < -100:
+		die()
 
-# Tạo hàm xử lý cái chết riêng
 func die():
-	if is_alive == true:
+	if is_alive:
 		is_alive = false
-		
-		# === LOGIC MỚI: GỌI HÀM _GAME_OVER() TỪ WORLD ===
-		var world = get_tree().current_scene
-		if world.has_method("_game_over"):
-			world._game_over()
-		# ==================================================
-		
-		# Hiển thị màn hình Game Over (bạn cần tạo một scene cho màn hình này)
-		print("Game Over!")
-		# Bạn có thể thêm các hành động khác ở đây, ví dụ như:
-		# - Điều khiển UI để hiển thị thông báo Game Over.
-		# - Ngừng tất cả các hoạt động của game (ví dụ như dừng âm thanh, stop_physics).
-		# - Hiển thị nút "Restart".
-
-		# Không cần reload scene nữa vì chúng ta sẽ quản lý việc bắt đầu lại trò chơi từ màn hình này.
+		died.emit() # Phát tín hiệu chết (Main sẽ lắng nghe cái này)
+		print("Bird died!")
